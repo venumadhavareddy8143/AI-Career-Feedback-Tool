@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Career Feedback Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 15px;
+      width: 400px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      width: 90%;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: #00c6ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00a2cc;
+    }
+
+    #result {
+      margin-top: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>AI Career Feedback Tool 🤖</h2>
+
+    <input type="text" id="career" placeholder="Enter your career (e.g., Data Analyst)">
+    <input type="text" id="skills" placeholder="Enter your skills (comma separated)">
+
+    <button onclick="analyze()">Get Feedback</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function analyze() {
+      let career = document.getElementById("career").value.toLowerCase();
+      let skills = document.getElementById("skills").value.toLowerCase();
+
+      let score = 50;
+      let feedback = "";
+
+      // Data Analyst logic
+      if (career.includes("data")) {
+        if (skills.includes("excel")) score += 10;
+        else feedback += "• Learn Excel\n";
+
+        if (skills.includes("sql")) score += 15;
+        else feedback += "• Learn SQL\n";
+
+        if (skills.includes("python")) score += 15;
+        else feedback += "• Learn Python\n";
+
+        if (skills.includes("power bi") || skills.includes("tableau")) score += 10;
+        else feedback += "• Learn Power BI/Tableau\n";
+      }
+
+      // Web Developer logic
+      else if (career.includes("web")) {
+        if (skills.includes("html")) score += 10;
+        else feedback += "• Learn HTML\n";
+
+        if (skills.includes("css")) score += 10;
+        else feedback += "• Learn CSS\n";
+
+        if (skills.includes("javascript")) score += 20;
+        else feedback += "• Learn JavaScript\n";
+
+        if (skills.includes("react")) score += 10;
+        else feedback += "• Learn React\n";
+      }
+
+      // Default case
+      else {
+        feedback = "• Add more specific career info for better analysis.";
+      }
+
+      if (score > 100) score = 100;
+
+      document.getElementById("result").innerHTML = `
+        <h3>Your Score: ${score}/100</h3>
+        <p><b>Suggestions:</b></p>
+        <pre>${feedback || "Great! You have strong skills 👍"}</pre>
+      `;
+    }
+  </script>
+
+</body>
+</html>
